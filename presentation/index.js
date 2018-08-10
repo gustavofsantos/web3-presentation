@@ -24,7 +24,15 @@ const theme = createTheme({
   primary: "white",
   secondary: "#1F2022",
   tertiary: "#03A9FC",
-  quarternary: "#CECECE"
+  quarternary: "#CECECE",
+  backgroundPrimary: "#F7F7F7",
+  backgroundSecondary: "#5f1854",
+  backgroundSecondaryDarker: "#3b0944",
+  foregroundPrimary: "#1A1A1A",
+  foregroundSecondary: "#FFFFE3",
+  accent: "#1abb9c",
+  accendLighter: "#6ef7c8",
+  accentDarker: "#00818a"
 }, {
   primary: "Montserrat",
   secondary: "Helvetica"
@@ -33,25 +41,33 @@ const theme = createTheme({
 export default class Presentation extends React.Component {
   render() {
     return (
-      <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
+      <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme} progress="bar">
+        <Slide transition={["zoom"]} bgColor="backgroundSecondary">
+          <Heading size={1} fit caps lineHeight={1} textColor="foregroundSecondary">
+            Web3 - O futuro da web
           </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
+          <Text margin="10px 0 0" textColor="accent" size={1} fit bold>
+            Gustavo Santos - gfdsantos@inf.ufpel.edu.br
           </Text>
         </Slide>
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>Typography</Heading>
-          <Heading size={1} textColor="secondary">Heading 1</Heading>
-          <Heading size={2} textColor="secondary">Heading 2</Heading>
-          <Heading size={3} textColor="secondary">Heading 3</Heading>
-          <Heading size={4} textColor="secondary">Heading 4</Heading>
-          <Heading size={5} textColor="secondary">Heading 5</Heading>
-          <Text size={6} textColor="secondary">Standard text</Text>
+
+        <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
+          <Heading size={2} fit caps textColor="foregroundSecondary">
+            Buzzwords dessa apresentação
+          </Heading>
+
+          <Heading margin="0.5em 0 0" size={6}  textColor="foregroundSecondary">Ethereum</Heading>
+          <Heading size={6} textColor="foregroundSecondary">Decentralização</Heading>
+          <Heading size={6} textColor="foregroundSecondary">IPFS & DAT</Heading>
         </Slide>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
+
+        <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
+          <Heading textColor="accent">
+            Code time
+          </Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="primary" textColor="tertiary">
           <Heading size={6} textColor="secondary" caps>Standard List</Heading>
           <List>
             <ListItem>Item 1</ListItem>
@@ -60,6 +76,7 @@ export default class Presentation extends React.Component {
             <ListItem>Item 4</ListItem>
           </List>
         </Slide>
+
         <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
           <BlockQuote>
             <Quote>Example Quote</Quote>
