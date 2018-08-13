@@ -11,7 +11,9 @@ import {
   List,
   Quote,
   Slide,
-  Text
+  Text,
+  Link,
+  Image
 } from "spectacle";
 
 // Import theme
@@ -56,15 +58,49 @@ export default class Presentation extends React.Component {
             Buzzwords dessa apresentação
           </Heading>
 
-          <Heading margin="0.5em 0 0" size={6}  textColor="foregroundSecondary">Ethereum</Heading>
+          <Heading margin="0.5em 0 0" size={6} textColor="foregroundSecondary">Ethereum (Smart Contracts)</Heading>
           <Heading size={6} textColor="foregroundSecondary">Decentralização</Heading>
           <Heading size={6} textColor="foregroundSecondary">IPFS & DAT</Heading>
+          <Heading size={6} textColor="foregroundSecondary">React</Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
+          <Heading textColor="accent" fit bold caps>
+            Imagine isso: internet eterna.
+          </Heading>
+        </Slide>
+        
+        <Slide transition={["slide"]} bgImage={"https://tecnoblog.net/wp-content/uploads/2017/03/060-1-700x438.jpg"} bgColor="backgroundSecondaryDarker">
+          test
         </Slide>
 
         <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
           <Heading textColor="accent">
-            Code time
+            Beaker Browser
           </Heading>
+
+          <Link href={"https://beakerbrowser.com/"} />
+        </Slide>
+
+
+        <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
+          <Heading textColor="accent">
+            Qual o custo da sua rede social preferida?
+          </Heading>
+
+          <Text>
+            Se algum serviço é gratuíto, o produto é você.
+          </Text>
+        </Slide>
+        
+        <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
+          <Heading textColor="accent">
+            O Google não deleta as informações que você deletou
+          </Heading>
+
+          <Text>
+            https://www.theguardian.com/commentisfree/2018/mar/28/all-the-data-facebook-google-has-on-you-privacy
+          </Text>
         </Slide>
 
         <Slide transition={["slide"]} bgColor="primary" textColor="tertiary">
