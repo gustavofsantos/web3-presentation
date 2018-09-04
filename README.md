@@ -1,12 +1,5 @@
-# Spectacle Boilerplate
 
-## Contents
-
-- [Reference](#reference)
-- [Getting Started](#getting-started)
-- [Build & Deployment](#build-deployment)
-
-## Reference
+# Reference
 
 The Spectacle core API is available at [https://github.com/FormidableLabs/spectacle/blob/master/README.md](https://github.com/FormidableLabs/spectacle/blob/master/README.md).
 
@@ -46,3 +39,9 @@ If you want to deploy the slideshow to surge, run
 ```bash
 npm run deploy
 ```
+
+## References
+  - https://docs.google.com/presentation/d/e/2PACX-1vRX_ZnEd5z-BfPtkNJccwf8Hq47usxZajTIlw8pEQGrIIOeuYKUQO-2slorJ74L_lRjjl8aDoRMuD9Z/pub?start=false&loop=false&delayms=3000&slide=id.g2a29aea96d_0_2042
+  - https://medium.com/uport/first-official-registration-of-a-zug-citizen-on-ethereum-3554b5c2c238
+  - https://webassembly.org/
+  - https://github.com/uport-project/uport-connect
