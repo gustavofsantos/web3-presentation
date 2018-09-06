@@ -45,3 +45,8 @@ npm run deploy
   - https://medium.com/uport/first-official-registration-of-a-zug-citizen-on-ethereum-3554b5c2c238
   - https://webassembly.org/
   - https://github.com/uport-project/uport-connect
+  - https://golem.network/
+  - https://aragon.org/
+  - https://ethlance.com/
+  - https://district0x.io/
+  - https://ujomusic.com/
