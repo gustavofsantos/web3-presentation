@@ -50,3 +50,4 @@ npm run deploy
   - https://ethlance.com/
   - https://district0x.io/
   - https://ujomusic.com/
+  - https://github.com/beakerbrowser/fritter
