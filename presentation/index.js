@@ -25,34 +25,183 @@ import createTheme from "spectacle/lib/themes/default";
 require("normalize.css");
 
 const theme = createTheme({
-  primary: "white",
+  primary: "#FFFFFF",
   secondary: "#1F2022",
-  tertiary: "#03A9FC",
-  quarternary: "#CECECE",
+  tertiary: "#0000ff",
+  quarternary: "#1e2a78",
   backgroundPrimary: "#F7F7F7",
-  backgroundSecondary: "#5f1854",
-  backgroundSecondaryDarker: "#3b0944",
+  backgroundSecondary: "#414141",
   foregroundPrimary: "#1A1A1A",
   foregroundSecondary: "#FFFFE3",
-  accent: "#1abb9c",
-  accendLighter: "#6ef7c8",
-  accentDarker: "#00818a"
+  accent: "#f9ff21",
+  accentDarker: "#ffd615",
+  accent2: "#ff1f5a"
 }, {
   primary: "Montserrat",
   secondary: "Helvetica"
 });
 
+const styles = {
+  verticalDiv: {
+    display: "flex"
+  },
+  button: {
+    background: "#0000ff",
+    color: "#FFF",
+    border: "none",
+    borderRadius: "12px",
+    padding: "14px",
+    width: "100%",
+    margin: "10px"
+  },
+  input: {
+    background: "#414141",
+    color: "#f9ff21",
+    border: "none",
+    borderRadius: "12px",
+    padding: "14px",
+    width: "100%",
+    margin: "10px"
+  }
+};
+
 export default class Presentation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ipfs = window.ipfs || new window.Ipfs({
+      EXPERIMENTAL: {
+        pubsub: true
+      },
+      config: {
+        Addresses: {
+          Swarm: [
+            "/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star",
+            "/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"
+          ]
+        }
+      }
+    });
+
+    if (this.ipfs.isOnline) {
+      this.state = {
+        ipfsOnline: this.ipfs.isOnline(),
+        peersConnected: 0,
+        inputIpfsHash: "",
+        inputIpfsContent: ""
+      };
+    } else {
+      // using companion
+      this.state = {
+        ipfsOnline: true,
+        peersConnected: 0,
+        inputIpfsHash: "",
+        inputIpfsHashToContent: "",
+        inputIpfsContent: "",
+        inputIpfsContentToHash: ""
+      };
+    }
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      if (this.state.ipfsOnline) {
+        this.ipfs.swarm.peers((err, peers) => {
+          if (peers.length > 0) {
+            this.setState({
+              peersConnected: peers.length
+            });
+          }
+        });
+      }
+    }, 5000);
+  }
+
+  handleInputIpfsHashChange = (ev) => {
+    this.setState({
+      inputIpfsHash: ev.target.value
+    });
+  }
+
+  handleInputIpfsHashSubmit = async () => {
+    const file = await this.ipfs.files.cat(this.state.inputIpfsHash);
+    const content = file.toString("utf8");
+    this.setState({
+      inputIpfsHashToContent: content
+    });
+  }
+
+  handleInputIpfsContentChange = (ev) => {
+    this.setState({
+      inputIpfsContent: ev.target.value
+    });
+  }
+
+  handleInputIpfsContentSubmit = async () => {
+    const files = await this.ipfs.files.add(Buffer.from(this.state.inputIpfsContent));
+    this.setState({
+      inputIpfsContentToHash: files[0].hash
+    });
+  }
+
   render() {
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme} progress="bar">
-        <Slide transition={["zoom"]} bgColor="backgroundSecondary">
-          <Heading size={1} fit caps lineHeight={1} textColor="foregroundSecondary">
-            Web3 - O futuro da web
+        <Slide transition={["zoom"]} bgColor="backgroundPrimary">
+          <Heading size={1} fit caps textColor="foregroundPrimary">
+            A internet de amanhã
           </Heading>
-          <Text margin="10px 0 0" textColor="accent" size={1} fit bold>
-            Gustavo Santos - gfdsantos@inf.ufpel.edu.br
+          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+            Gustavo Santos
           </Text>
+          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
+            gfdsantos@inf.ufpel.edu.br
+          </Text>
+        </Slide>
+
+        <Slide>
+          <Image src="../assets/city.jpg" />
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <Heading size={1} fit caps bold textColor="foregroundPrimary">
+            Blockchain
+          </Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <Heading size={1} fit caps bold textColor="foregroundPrimary">
+            Ethereum
+          </Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <Heading size={1} fit caps bold textColor="foregroundPrimary">
+            IPFS
+          </Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <Heading size={2} fit caps textColor="foregroundPrimary">
+            Conectado a
+          </Heading>
+          <Heading size={2} fit caps>
+            {this.state.peersConnected}
+          </Heading>
+          <Heading size={2} fit caps textColor="foregroundPrimary">
+            Computadores
+          </Heading>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <input style={styles.input} value={this.state.inputIpfsContent} onChange={this.handleInputIpfsContentChange}/>
+          <button style={styles.button} onClick={this.handleInputIpfsContentSubmit}>Adicionar</button>
+          <Text fit>{this.state.inputIpfsContentToHash}</Text>
+        </Slide>
+
+        <Slide transition={["slide"]} bgColor="backgroundPrimary">
+          <input style={styles.input} value={this.state.inputIpfsHash} onChange={this.handleInputIpfsHashChange}/>
+          <button style={styles.button} onClick={this.handleInputIpfsHashSubmit}>Ver</button>
+          <Text fit>{this.state.inputIpfsHashToContent}</Text>
         </Slide>
 
         <Slide transition={["slide"]} bgColor="backgroundSecondaryDarker">
