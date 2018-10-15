@@ -52,3 +52,5 @@ npm run deploy
   - https://ujomusic.com/
   - https://github.com/beakerbrowser/fritter
   - https://www.cloudflare.com/distributed-web-gateway/
+  - http://radicle.xyz/   (http://oscoin.io/radicle.html)
+  - https://formidable.com/blog/2018/spectacle-mdx/
